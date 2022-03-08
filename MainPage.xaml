@@ -1,0 +1,58 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionViewSample.MainPage"
+             BackgroundColor="{DynamicResource SecondaryColor}">
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                    Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowSpacing="25" RowDefinitions="1*,4*"
+              Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+
+        <Label 
+                Text="Hello, World!"
+                Grid.Row="0"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+        <CollectionView Grid.Row="1"
+                ItemsSource="{Binding People}"
+                SelectionMode="Single"
+                Margin="20,0">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10"
+                           Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout InputTransparent="True">
+                        <Label Text="{Binding Name}"
+                       InputTransparent="True"
+                       TextColor="Black"
+                       FontSize="Large"/>
+                        <Label Text="{Binding Title}"
+                       InputTransparent="True"
+                       TextColor="Gray"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
